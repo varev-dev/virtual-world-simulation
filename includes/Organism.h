@@ -5,10 +5,11 @@
 #ifndef VIRTUAL_WORLD_SIMULATION_ORGANISM_H
 #define VIRTUAL_WORLD_SIMULATION_ORGANISM_H
 
-#include "World.h"
 #include <cinttypes>
 
+#include "World.h"
 class World;
+
 class Organism {
 protected:
     uint16_t x, y;
