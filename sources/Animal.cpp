@@ -7,13 +7,6 @@
 #include <random>
 #include <iostream>
 
-typedef enum direction {
-    NORTH = 0,
-    SOUTH,
-    WEST,
-    EAST
-} direction;
-
 direction randomizeDirection(const Organism& organism) {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -48,7 +41,8 @@ direction randomizeDirection(const Organism& organism) {
 }
 
 void Animal::action(World &world) {
-
+    direction dir = randomizeDirection(*this);
+    updatePosition(dir);
 }
 
 void Animal::collision(World &world) {
