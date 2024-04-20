@@ -7,10 +7,11 @@
 
 #include "Organism.h"
 
-class Plant : Organism {
+class Plant : public Organism {
 public:
-    virtual void action(World &world) override;
-    virtual void collision(World &world) override;
+    virtual uint8_t getSign() override;
+    virtual void action() override;
+    virtual void collision(Organism& organism) override;
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_PLANT_H
