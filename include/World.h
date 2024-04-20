@@ -7,6 +7,7 @@
 
 #include <cinttypes>
 #include <vector>
+#include <memory>
 
 #include "Organism.h"
 class Organism;
@@ -14,18 +15,19 @@ class Organism;
 class World {
 private:
     uint16_t width, length;
+    uint32_t turn;
     std::vector<Organism*> organisms;
 public:
     World(uint16_t width, uint16_t length);
+    ~World();
+
     uint16_t getWidth() const;
     uint16_t getHeight() const;
+    std::vector<Organism*> getOrganisms();
+    Organism* getOrganismByPosition(uint16_t x, uint16_t y);
 
     void makeTurn();
     void printWorld();
-    void createOrganism(Organism* organism);
-    void modifyOrganism(Organism* organism);
-
-    ~World();
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_WORLD_H

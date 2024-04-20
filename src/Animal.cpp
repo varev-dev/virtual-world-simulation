@@ -2,7 +2,8 @@
 // Created by varev on 04.04.2024.
 //
 
-#include "../includes/Animal.h"
+#include "../include/Animal.h"
+#include "../include/plant/Guarana.h"
 
 #include <random>
 #include <iostream>
@@ -21,7 +22,7 @@ direction randomizeDirection(const Organism& organism) {
                     isMoveValid = true;
                 break;
             case SOUTH:
-                if (organism.getY() != organism.getWorld().getHeight() - 1)
+                if (organism.getY() != organism.getWorld()->getHeight() - 1)
                     isMoveValid = true;
                 break;
             case WEST:
@@ -29,7 +30,7 @@ direction randomizeDirection(const Organism& organism) {
                     isMoveValid = true;
                 break;
             case EAST:
-                if (organism.getX() != organism.getWorld().getWidth() - 1)
+                if (organism.getX() != organism.getWorld()->getWidth() - 1)
                     isMoveValid = true;
                 break;
             default:
@@ -40,11 +41,20 @@ direction randomizeDirection(const Organism& organism) {
     return dir;
 }
 
-void Animal::action(World &world) {
+void Animal::action() {
     direction dir = randomizeDirection(*this);
-    updatePosition(dir);
-}
+    uint16_t* position = newPosition(dir);
 
-void Animal::collision(World &world) {
+    Organism* collider;
 
+    for (auto org : world->getOrganisms()) {
+        if (org->getX() != position[X])
+            continue;
+        if (org->getY() != position[Y])
+            continue;
+
+        collider = org;
+    }
+
+    collider->collision(*this);
 }

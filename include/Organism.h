@@ -5,7 +5,6 @@
 #ifndef VIRTUAL_WORLD_SIMULATION_ORGANISM_H
 #define VIRTUAL_WORLD_SIMULATION_ORGANISM_H
 
-
 #include <cinttypes>
 
 #include "Direction.h"
@@ -21,9 +20,8 @@ protected:
     ~Organism();
 
 public:
-    void updatePosition(direction dir);
-    virtual void action(World& world) = 0;
-    virtual void collision(World& world) = 0;
+    virtual void action() = 0;
+    virtual void collision(Organism& organism) = 0;
 
     World* getWorld() const;
     uint16_t getX() const;
@@ -31,6 +29,10 @@ public:
     uint8_t getPower() const;
     uint8_t getInitiative() const;
     virtual uint8_t getSign() const;
+
+    void setPower(uint8_t power);
+    void updatePosition(const uint16_t position[2]);
+    uint16_t* newPosition(direction dir);
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_ORGANISM_H

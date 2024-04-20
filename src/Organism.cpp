@@ -2,32 +2,35 @@
 // Created by varev on 20.04.2024.
 //
 
-#include "../includes/Organism.h"
+#include "../include/Organism.h"
 
 Organism::Organism(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World* world) :
         x(x), y(y), power(power), initiative(initiative), world(world) {};
 
 Organism::~Organism() = default;
 
-void Organism::updatePosition(direction dir) {
+void Organism::updatePosition(const uint16_t position[2]) {
+    x = position[X];
+    y = position[Y];
+}
+
+uint16_t* Organism::newPosition(direction dir) {
+    uint16_t newX = x, newY = y;
     switch (dir) {
         case NORTH:
-            if (y > 0)
-                this->y--;
+            if (newY > 0) newY--;
             break;
         case SOUTH:
-            if (y < world->getHeight() - 1)
-                this->y++;
+            if (newY< world->getHeight() - 1) newY++;
             break;
         case WEST:
-            if (x > 0)
-                this->x--;
+            if (newX > 0) newX--;
             break;
         case EAST:
-            if (x < world->getWidth() - 1)
-                this->x++;
+            if (newX < world->getWidth() - 1) newX++;
             break;
     }
+    return new uint16_t[2]{newX,newY};
 }
 
 World* Organism::getWorld() const {
@@ -44,6 +47,10 @@ uint16_t Organism::getY() const {
 
 uint8_t Organism::getPower() const {
     return power;
+}
+
+void Organism::setPower(uint8_t updated) {
+    this->power = updated;
 }
 
 uint8_t Organism::getInitiative() const {

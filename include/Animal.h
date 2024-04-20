@@ -6,11 +6,12 @@
 #define VIRTUAL_WORLD_SIMULATION_ANIMAL_H
 
 #include "Organism.h"
+#include "Plant.h"
 
-class Animal : Organism {
+class Animal : public Organism {
 public:
-    virtual void action(World &world) override;
-    virtual void collision(World &world) override;
+    virtual void action() override;
+    virtual void collision(Organism& organism) override;
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_ANIMAL_H
