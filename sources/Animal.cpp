@@ -7,41 +7,48 @@
 #include <random>
 #include <iostream>
 
-#define NORTH 0
-#define SOUTH 1
-#define WEST 2
-#define EAST 3
+typedef enum direction {
+    NORTH = 0,
+    SOUTH,
+    WEST,
+    EAST
+} direction;
 
-void Animal::action(World &world) {
+direction randomizeDirection(const Organism& organism) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, 3);
     bool isMoveValid = false;
+    direction dir;
     while (!isMoveValid) {
-        int direction = dis(gen);
-
-        switch (direction) {
+        dir = direction(dis(gen));
+        switch (dir) {
             case NORTH:
-                if (y != 0)
+                if (organism.getY() != 0)
                     isMoveValid = true;
                 break;
             case SOUTH:
-                if (y != world.getHeight() - 1)
+                if (organism.getY() != organism.getWorld().getHeight() - 1)
                     isMoveValid = true;
                 break;
             case WEST:
-                if (x != 0)
+                if (organism.getX() != 0)
                     isMoveValid = true;
                 break;
             case EAST:
-                if (x != world.getWidth() - 1)
+                if (organism.getX() != organism.getWorld().getWidth() - 1)
                     isMoveValid = true;
                 break;
             default:
-                std::cout << "unknown direction";
+                std::cout << "Unknown direction";
                 break;
         }
     }
+    return dir;
+}
+
+void Animal::action(World &world) {
+
 }
 
 void Animal::collision(World &world) {
