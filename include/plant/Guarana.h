@@ -8,8 +8,10 @@
 #include "../Plant.h"
 
 class Guarana : public Plant {
+private:
+    static uint8_t STRENGTH_INCREASE;
 public:
-    uint8_t getSign() override;
+    Guarana(uint16_t x, uint16_t y, World *world);
     void collision(Organism& organism) override;
 };
 

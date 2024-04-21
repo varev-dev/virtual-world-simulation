@@ -7,9 +7,10 @@
 
 #include "../Plant.h"
 
+// Mlecz
 class Sonchus : public Plant {
 public:
-    uint8_t getSign() override;
+    Sonchus(uint16_t x, uint16_t y, World *world);
     void action() override;
 };
 

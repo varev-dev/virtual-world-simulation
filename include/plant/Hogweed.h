@@ -7,9 +7,10 @@
 
 #include "../Plant.h"
 
+// Barszcz Sosnowskiego
 class Hogweed : public Plant {
 public:
-    uint8_t getSign() override;
+    Hogweed(uint16_t x, uint16_t y, World *world);
     void action() override;
     void collision(Organism& organism) override;
 };
