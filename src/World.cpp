@@ -5,6 +5,12 @@
 #include <iostream>
 #include "../include/World.h"
 
+#include "../include/plant/Belladonna.h"
+#include "../include/plant/Grass.h"
+#include "../include/plant/Hogweed.h"
+#include "../include/plant/Guarana.h"
+#include "../include/plant/Sonchus.h"
+
 #include "../include/exception/PositionException.h"
 
 World::World(uint16_t width, uint16_t height) : width(width), height(height), turn(0) {}
@@ -67,4 +73,17 @@ void World::removeOrganism(Organism &organism) {
             break;
         }
     }
+}
+
+void World::growPlant(Organism &organism, uint16_t *position) {
+    if (dynamic_cast<Belladonna*>(&organism))
+        addOrganism(*(new Belladonna(position[X], position[Y], this)));
+    else if (dynamic_cast<Sonchus*>(&organism))
+        addOrganism(*(new Sonchus(position[X], position[Y], this)));
+    else if (dynamic_cast<Hogweed*>(&organism))
+        addOrganism(*(new Hogweed(position[X], position[Y], this)));
+    else if (dynamic_cast<Guarana*>(&organism))
+        addOrganism(*(new Guarana(position[X], position[Y], this)));
+    else if (dynamic_cast<Grass*>(&organism))
+        addOrganism(*(new Grass(position[X], position[Y], this)));
 }

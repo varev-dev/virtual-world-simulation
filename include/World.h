@@ -19,12 +19,12 @@ private:
     std::vector<Organism*> organisms;
 public:
     World(uint16_t width, uint16_t height);
-    ~World();
 
     uint16_t getWidth() const;
     uint16_t getHeight() const;
     uint32_t getTurn() const;
 
+    void growPlant(Organism& organism, uint16_t* position);
     void addOrganism(Organism& organism);
     std::vector<Organism*> getOrganisms();
     void removeOrganism(Organism& organism);
