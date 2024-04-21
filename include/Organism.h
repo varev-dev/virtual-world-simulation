@@ -6,13 +6,14 @@
 #define VIRTUAL_WORLD_SIMULATION_ORGANISM_H
 
 #include <cinttypes>
-
 #include "Direction.h"
+
 #include "World.h"
 class World;
 
 class Organism {
 protected:
+    uint8_t sign = 'U';
     uint16_t x, y;
     uint8_t power, initiative;
     World* world;
@@ -28,11 +29,12 @@ public:
     uint16_t getY() const;
     uint8_t getPower() const;
     uint8_t getInitiative() const;
-    virtual uint8_t getSign() const;
+    virtual uint8_t getSign();
 
     void setPower(uint8_t power);
     void updatePosition(const uint16_t position[2]);
     uint16_t* newPosition(direction dir);
+    friend std::ostream& operator<<(std::ostream& os, const Organism& organism);
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_ORGANISM_H

@@ -9,9 +9,9 @@
 
 class Plant : public Organism {
 public:
-    virtual uint8_t getSign() override;
-    virtual void action() override;
-    virtual void collision(Organism& organism) override;
+    Plant(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World* world);
+    void action() override;
+    void collision(Organism& organism) override;
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_PLANT_H

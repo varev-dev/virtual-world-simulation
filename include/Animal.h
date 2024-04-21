@@ -10,8 +10,10 @@
 
 class Animal : public Organism {
 public:
-    virtual void action() override;
-    virtual void collision(Organism& organism) override;
+    Animal(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World* world);
+    void action() override;
+    void collision(Organism& organism) override;
+    uint8_t getSign() override;
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_ANIMAL_H

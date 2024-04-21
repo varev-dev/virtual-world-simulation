@@ -3,10 +3,14 @@
 //
 
 #include "../include/Animal.h"
-#include "../include/plant/Guarana.h"
 
 #include <random>
 #include <iostream>
+
+Animal::Animal(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World *world) :
+        Organism(x, y, power, initiative, world) {
+    Organism::sign = 'A';
+}
 
 direction randomizeDirection(const Organism& organism) {
     std::random_device rd;
@@ -57,4 +61,13 @@ void Animal::action() {
     }
 
     collider->collision(*this);
+    delete(position);
+}
+
+uint8_t Animal::getSign() {
+    return sign;
+}
+
+void Animal::collision(Organism &organism) {
+
 }

@@ -4,6 +4,8 @@
 
 #include "../include/Organism.h"
 
+#include <string>
+
 Organism::Organism(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World* world) :
         x(x), y(y), power(power), initiative(initiative), world(world) {};
 
@@ -57,6 +59,14 @@ uint8_t Organism::getInitiative() const {
     return initiative;
 }
 
-uint8_t Organism::getSign() const {
-    return 'U';
+uint8_t Organism::getSign() {
+    return sign;
+}
+
+std::ostream& operator<<(std::ostream& os, const Organism &organism) {
+    std::string message;
+    message = organism.sign;
+    message.append(" (" + std::to_string(organism.x) + "; " + std::to_string(organism.y) + ")");
+    os << message;
+    return os;
 }
