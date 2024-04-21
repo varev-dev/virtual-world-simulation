@@ -64,10 +64,6 @@ void Animal::action() {
     delete(position);
 }
 
-uint8_t Animal::getSign() {
-    return sign;
-}
-
 void Animal::collision(Organism &organism) {
 
 }
