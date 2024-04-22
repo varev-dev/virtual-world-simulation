@@ -15,7 +15,7 @@ class Organism;
 class World {
 private:
     uint16_t width, height;
-    uint32_t turn;
+    int32_t turn;
     std::vector<Organism*> organisms;
     bool doesOrganismExists(Organism& organism);
 public:
@@ -23,7 +23,7 @@ public:
 
     uint16_t getWidth() const;
     uint16_t getHeight() const;
-    uint32_t getTurn() const;
+    int32_t getTurn() const;
 
     void growPlant(Organism& organism, uint16_t* position);
     void addOrganism(Organism& organism);

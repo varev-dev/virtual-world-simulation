@@ -11,12 +11,13 @@
 #include "../include/animal/Sheep.h"
 #include "../include/animal/Wolf.h"
 
-uint32_t Animal::JUST_BORN = -2;
-uint32_t Animal::FREE = -1;
+int32_t Animal::JUST_BORN = -2;
+int32_t Animal::FREE = -1;
 
 Animal::Animal(uint16_t x, uint16_t y, World *world) :
         Organism(x, y, 1, 1, world) {
     Organism::sign = 'A';
+    lastActionTurn = world->getTurn() ? JUST_BORN : FREE;
 }
 
 void Animal::action() {
@@ -36,10 +37,11 @@ void Animal::action() {
 
         if (collider) {
             collider->collision(*this);
-            lastActionTurn = world->getTurn();
+            lastActionTurn = (int32_t) world->getTurn();
         }
 
-        updatePosition(position);
+        if (!world->getOrganismByPosition(position[X], position[Y]))
+            updatePosition(position);
 
         delete[] position;
         break;
@@ -66,7 +68,7 @@ bool Animal::birth() {
             continue;
         }
 
-        if (!world->getOrganismByPosition(position[X], position[Y])) {
+        if (world->getOrganismByPosition(position[X], position[Y])) {
             delete[] position;
             continue;
         }
@@ -81,18 +83,18 @@ bool Animal::birth() {
             organism = new Sheep(position[X], position[Y], world);
 
         world->addOrganism(*organism);
-        lastActionTurn = world->getTurn();
+        lastActionTurn = (int32_t) world->getTurn();
         delete[] position;
         return true;
     }
     return false;
 }
 
-uint32_t Animal::getLastActionTurn() const {
+int32_t Animal::getLastActionTurn() const {
     return lastActionTurn;
 }
 
-void Animal::setLastActionTurn(uint32_t turn) {
+void Animal::setLastActionTurn(int32_t turn) {
     lastActionTurn = turn;
 }
 

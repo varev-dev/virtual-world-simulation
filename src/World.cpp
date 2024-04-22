@@ -58,7 +58,7 @@ uint16_t World::getHeight() const {
     return height;
 }
 
-uint32_t World::getTurn() const {
+int32_t World::getTurn() const {
     return turn;
 }
 
@@ -106,6 +106,8 @@ bool World::doesOrganismExists(Organism& organism) {
 
 void World::makeTurn() {
     //std::vector<Organism*> copy(organisms);
+    turn++;
+
     for (auto* org : organisms) {
         if (auto* animal = dynamic_cast<Animal*>(org)) {
             if (animal->getLastActionTurn() == Animal::JUST_BORN)
@@ -114,11 +116,12 @@ void World::makeTurn() {
     }
 
     for (auto* org : organisms) {
-        if (!doesOrganismExists(*org))
-            continue;
+        if (!doesOrganismExists(*org)) continue;
+        if (auto* animal = dynamic_cast<Animal*>(org))
+            if (animal->getLastActionTurn() == Animal::JUST_BORN) continue;
         org->action();
+        break;
     }
-    turn++;
 }
 
 bool World::isWorldFull() {

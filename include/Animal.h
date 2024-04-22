@@ -10,16 +10,16 @@
 
 class Animal : public Organism {
 private:
-    uint32_t lastActionTurn = -1;
+    int32_t lastActionTurn = -1;
 public:
-    static uint32_t JUST_BORN;
-    static uint32_t FREE;
+    static int32_t JUST_BORN;
+    static int32_t FREE;
     Animal(uint16_t x, uint16_t y, World* world);
     void action() override;
     void collision(Organism& organism) override;
     bool birth();
-    uint32_t getLastActionTurn() const;
-    void setLastActionTurn(uint32_t turn);
+    int32_t getLastActionTurn() const;
+    void setLastActionTurn(int32_t turn);
     void setLastActionTurn();
 };
 
