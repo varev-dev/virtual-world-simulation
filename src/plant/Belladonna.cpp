@@ -8,3 +8,7 @@ Belladonna::Belladonna(uint16_t x, uint16_t y, World *world) :
     Plant(x, y, world) {
     sign = 'B';
 }
+
+void Belladonna::collision(Organism &organism) {
+    world->removeOrganism(organism);
+}

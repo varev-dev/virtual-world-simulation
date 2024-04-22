@@ -4,12 +4,14 @@
 #include "include/World.h"
 #include "include/Animal.h"
 #include "include/plant/Guarana.h"
+#include "include/plant/Hogweed.h"
 
 int main() {
-    auto* world = new World(8, 8);
-    auto* animal = new Animal(1, 1, 2, 3, world);
-    auto* plant = new Guarana(0, 0, world);
-    //world->addOrganism(*plant);
+    auto* world = new World(4,4);
+    auto* animal = new Animal(0, 3, 2, 3, world);
+    auto* plant = new Hogweed(2, 0, world);
+
+    world->addOrganism(*animal);
     world->addOrganism(*plant);
 
     world->printWorld();
