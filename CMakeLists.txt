@@ -31,4 +31,8 @@ add_executable(virtual_world_simulation main.cpp
         include/animal/Sheep.h
         src/animal/Sheep.cpp
         include/animal/Fox.h
-        src/animal/Fox.cpp)
+        src/animal/Fox.cpp
+        include/animal/Turtle.h
+        src/animal/Turtle.cpp
+        include/animal/Antelope.h
+        src/animal/Antelope.cpp)
