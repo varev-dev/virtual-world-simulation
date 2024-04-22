@@ -87,7 +87,5 @@ direction Organism::getRandomDirection() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, 3);
-    direction dir;
-    dir = direction(dis(gen));
-    return dir;
+    return direction(dis(gen));
 }
