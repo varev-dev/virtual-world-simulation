@@ -9,7 +9,7 @@
 #include "Plant.h"
 
 class Animal : public Organism {
-private:
+protected:
     int32_t lastActionTurn = -1;
 public:
     static int32_t JUST_BORN;

@@ -105,7 +105,6 @@ bool World::doesOrganismExists(Organism& organism) {
 }
 
 void World::makeTurn() {
-    //std::vector<Organism*> copy(organisms);
     turn++;
 
     for (auto* org : organisms) {
