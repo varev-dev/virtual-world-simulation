@@ -1,0 +1,23 @@
+//
+// Created by varev on 22.04.2024.
+//
+
+#include "../../include/animal/Fox.h"
+
+Fox::Fox(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
+    sign = 'F';
+    power = 3;
+    initiative = 7;
+}
+
+void Fox::collision(Organism &organism) {
+    if (auto* other = dynamic_cast<Fox*>(&organism)) {
+        birth() ? : other->birth();
+        return;
+    }
+    Animal::collision(organism);
+}
+
+void Fox::action() {
+    Animal::action();
+}

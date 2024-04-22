@@ -5,7 +5,6 @@
 #include <iostream>
 #include <random>
 #include "../include/Plant.h"
-#include "../include/exception/PositionException.h"
 
 Plant::Plant(uint16_t x, uint16_t y, World *world) :
         Organism(x, y, 0, 0, world) {
