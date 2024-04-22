@@ -4,12 +4,16 @@
 
 #include "../../include/plant/Sonchus.h"
 
+uint8_t Sonchus::SPREAD_ATTEMPTS = 3;
+
 Sonchus::Sonchus(uint16_t x, uint16_t y, World *world) :
         Plant(x, y, world) {
     sign = 'S';
-    power = 5;
+    sowChance = 5;
 }
 
 void Sonchus::action() {
-    Plant::action();
+    for (int i = 0; i < SPREAD_ATTEMPTS; i++) {
+        Plant::action();
+    }
 }

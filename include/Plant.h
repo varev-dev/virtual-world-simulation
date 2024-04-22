@@ -8,6 +8,8 @@
 #include "Organism.h"
 
 class Plant : public Organism {
+protected:
+    uint8_t sowChance = 3; // higher - smaller chance to sow
 public:
     Plant(uint16_t x, uint16_t y, World* world);
     void action() override;

@@ -36,8 +36,6 @@ void Animal::action() {
 }
 
 void Animal::collision(Organism &organism) {
-    if (power <= organism.getPower())
-        world->removeOrganism(*this);
-    else
-        world->removeOrganism(organism);
+    if (power <= organism.getPower()) world->removeOrganism(*this);
+    else world->removeOrganism(organism);
 }

@@ -14,6 +14,11 @@
 World::World(uint16_t width, uint16_t height) : width(width), height(height), turn(0) {}
 
 void World::addOrganism(Organism &organism) {
+    if (dynamic_cast<Plant*>(&organism)) {
+        organisms.push_back(&organism);
+        return;
+    }
+
     size_t id = organisms.size();
     for (size_t i = 0; i < organisms.size(); i++) {
         if (organism.getX() == organisms[i]->getX() && organism.getY() == organisms[i]->getY())
