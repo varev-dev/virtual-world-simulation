@@ -22,21 +22,22 @@ void Plant::collision(Organism &organism) {
 void Plant::action() {
     bool checked[4] = {false,false,false,false};
     while (!Organism::isEveryDirectionChecked(checked)) {
-        direction random;
-        try { random = getRandomDirection(); }
-        catch (const PositionException& e) { break; }
+        direction random = getRandomDirection();
 
         if (checked[random]) continue;
 
         checked[random] = true;
         uint16_t* position = newPosition(random);
 
+        if (!world->isPositionLegal(position[X], position[Y]))
+            continue;
+
         if (world->getOrganismByPosition(position[X], position[Y]) != nullptr)
             continue;
 
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_int_distribution<> dis(0, 3);
+        std::uniform_int_distribution<> dis(0, 7);
 
         if (dis(gen) == 0)
             world->growPlant(*this, position);

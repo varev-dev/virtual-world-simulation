@@ -19,7 +19,7 @@ protected:
     World* world;
     Organism(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World* world);
     ~Organism();
-    direction getRandomDirection();
+    static direction getRandomDirection();
     static bool isEveryDirectionChecked(const bool* directions);
 
 public:

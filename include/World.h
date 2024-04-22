@@ -31,6 +31,7 @@ public:
     void removeOrganism(Organism& organism);
     Organism* getOrganismByPosition(uint16_t x, uint16_t y);
     bool isWorldFull();
+    bool isPositionLegal(uint16_t x, uint16_t y) const;
     void makeTurn();
     void printWorld();
 };

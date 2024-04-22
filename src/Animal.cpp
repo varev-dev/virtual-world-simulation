@@ -13,22 +13,26 @@ Animal::Animal(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World 
 }
 
 void Animal::action() {
-    direction dir = getRandomDirection();
-    uint16_t* position = newPosition(dir);
+    bool checked[4] = {false, false, false, false};
+    while (!Organism::isEveryDirectionChecked(checked)) {
+        direction dir = getRandomDirection();
 
-    Organism* collider;
+        if (checked[dir]) continue;
+        checked[dir] = true;
 
-    for (auto org : world->getOrganisms()) {
-        if (org->getX() != position[X])
+        uint16_t* position = newPosition(dir);
+
+        if (position[X] == x && position[Y] == y)
             continue;
-        if (org->getY() != position[Y])
-            continue;
 
-        collider = org;
+        Organism* collider = world->getOrganismByPosition(position[X], position[Y]);
+
+        if (collider) collider->collision(*this);
+        else updatePosition(position);
+
+        delete[] position;
+        break;
     }
-
-    collider->collision(*this);
-    delete(position);
 }
 
 void Animal::collision(Organism &organism) {

@@ -20,7 +20,7 @@ void Organism::updatePosition(const uint16_t position[2]) {
 }
 
 uint16_t* Organism::newPosition(direction dir) {
-    uint16_t newX = x, newY = y;
+    uint16_t newX(x), newY(y);
     switch (dir) {
         case NORTH:
             if (newY > 0) newY--;

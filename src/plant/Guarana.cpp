@@ -13,5 +13,6 @@ Guarana::Guarana(uint16_t x, uint16_t y, World *world) :
 
 void Guarana::collision(Organism &organism) {
     organism.setPower(organism.getPower() + STRENGTH_INCREASE);
+    world->removeOrganism(*this);
     Plant::collision(organism);
 }

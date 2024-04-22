@@ -60,7 +60,7 @@ void World::printWorld() {
     std::cout << "Turn " << turn << std::endl;
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            Organism* org = getOrganismByPosition(i, j);
+            Organism* org = getOrganismByPosition(j, i);
             std::cout << (char) (org ? org->getSign() : '-');
         }
         std::cout << std::endl;
@@ -99,8 +99,8 @@ bool World::doesOrganismExists(Organism& organism) {
 }
 
 void World::makeTurn() {
-    std::vector<Organism*> copy(organisms);
-    for (auto* org : copy) {
+    //std::vector<Organism*> copy(organisms);
+    for (auto* org : organisms) {
         if (!doesOrganismExists(*org))
             continue;
         org->action();
@@ -110,4 +110,13 @@ void World::makeTurn() {
 
 bool World::isWorldFull() {
     return organisms.size() == (width * height);
+}
+
+bool World::isPositionLegal(uint16_t x, uint16_t y) const {
+    if (x < 0 || x >= width)
+        return false;
+    if (y < 0 || y >= height)
+        return false;
+
+    return true;
 }

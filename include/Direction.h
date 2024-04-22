@@ -14,7 +14,7 @@ typedef enum direction {
 
 typedef enum axis {
     X = 0,
-    Y
+    Y = 1
 } axis;
 
 #endif //VIRTUAL_WORLD_SIMULATION_DIRECTION_H
