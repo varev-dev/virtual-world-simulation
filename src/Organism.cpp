@@ -3,10 +3,11 @@
 //
 
 #include "../include/Organism.h"
-#include "../include/exception/PositionException.h"
 
 #include <string>
 #include <random>
+
+#include "../include/exception/PositionException.h"
 
 Organism::Organism(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World* world) :
         x(x), y(y), power(power), initiative(initiative), world(world) {};
@@ -25,7 +26,7 @@ uint16_t* Organism::newPosition(direction dir) {
             if (newY > 0) newY--;
             break;
         case SOUTH:
-            if (newY< world->getHeight() - 1) newY++;
+            if (newY < world->getHeight() - 1) newY++;
             break;
         case WEST:
             if (newX > 0) newX--;
@@ -73,33 +74,20 @@ std::ostream& operator<<(std::ostream& os, const Organism &organism) {
     return os;
 }
 
+bool Organism::isEveryDirectionChecked(const bool *directions) {
+    for (size_t i = 0; i <= EAST; i++) {
+        if (!directions[i])
+            return false;
+    }
+    return true;
+}
+
+
 direction Organism::getRandomDirection() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, 3);
-    bool isMoveValid = false;
     direction dir;
-    while (!isMoveValid) {
-        dir = direction(dis(gen));
-        switch (dir) {
-            case NORTH:
-                if (y != 0)
-                    isMoveValid = true;
-                break;
-            case SOUTH:
-                if (y != world->getHeight() - 1)
-                    isMoveValid = true;
-                break;
-            case WEST:
-                if (x != 0)
-                    isMoveValid = true;
-                break;
-            case EAST:
-                if (x != world->getWidth() - 1)
-                    isMoveValid = true;
-                break;
-            default:
-                throw PositionException("No possible move");}
-    }
+    dir = direction(dis(gen));
     return dir;
 }

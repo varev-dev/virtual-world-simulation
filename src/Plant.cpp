@@ -5,6 +5,7 @@
 #include <iostream>
 #include <random>
 #include "../include/Plant.h"
+#include "../include/exception/PositionException.h"
 
 Plant::Plant(uint16_t x, uint16_t y, World *world) :
         Organism(x, y, 0, 0, world) {
@@ -18,20 +19,14 @@ void Plant::collision(Organism &organism) {
     delete[] position;
 }
 
-bool isEveryDirectionChecked(const bool* directions) {
-    for (size_t i = 0; i <= EAST; i++) {
-        if (!directions[i])
-            return false;
-    }
-    return true;
-}
-
 void Plant::action() {
-    bool* checked = new bool[4]{false,false,false,false};
-    while (!isEveryDirectionChecked(checked)) {
-        direction random = getRandomDirection();
-        if (checked[random])
-            continue;
+    bool checked[4] = {false,false,false,false};
+    while (!Organism::isEveryDirectionChecked(checked)) {
+        direction random;
+        try { random = getRandomDirection(); }
+        catch (const PositionException& e) { break; }
+
+        if (checked[random]) continue;
 
         checked[random] = true;
         uint16_t* position = newPosition(random);
@@ -45,6 +40,8 @@ void Plant::action() {
 
         if (dis(gen) == 0)
             world->growPlant(*this, position);
+
+        delete[] position;
         break;
     }
 }

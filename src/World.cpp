@@ -11,15 +11,13 @@
 #include "../include/plant/Guarana.h"
 #include "../include/plant/Sonchus.h"
 
-#include "../include/exception/PositionException.h"
-
 World::World(uint16_t width, uint16_t height) : width(width), height(height), turn(0) {}
 
 void World::addOrganism(Organism &organism) {
     size_t id = organisms.size();
     for (size_t i = 0; i < organisms.size(); i++) {
         if (organism.getX() == organisms[i]->getX() && organism.getY() == organisms[i]->getY())
-            throw PositionException("Position already in use.");
+            continue;
 
         if (organisms[i]->getInitiative() >= organism.getInitiative())
             continue;
@@ -43,7 +41,7 @@ Organism* World::getOrganismByPosition(uint16_t x, uint16_t y) {
 
         return organism;
     }
-    throw PositionException("No organism with given position");
+    return nullptr;
 }
 
 uint16_t World::getWidth() const {
@@ -60,8 +58,12 @@ uint32_t World::getTurn() const {
 
 void World::printWorld() {
     std::cout << "Turn " << turn << std::endl;
-    for (const auto &item: organisms) {
-        std::cout << *item << ", ";
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            Organism* org = getOrganismByPosition(i, j);
+            std::cout << (char) (org ? org->getSign() : '-');
+        }
+        std::cout << std::endl;
     }
     std::cout << std::endl;
 }
@@ -86,4 +88,26 @@ void World::growPlant(Organism &organism, uint16_t *position) {
         addOrganism(*(new Guarana(position[X], position[Y], this)));
     else if (dynamic_cast<Grass*>(&organism))
         addOrganism(*(new Grass(position[X], position[Y], this)));
+}
+
+bool World::doesOrganismExists(Organism& organism) {
+    for (auto* org : organisms) {
+        if (org == &organism)
+            return true;
+    }
+    return false;
+}
+
+void World::makeTurn() {
+    std::vector<Organism*> copy(organisms);
+    for (auto* org : copy) {
+        if (!doesOrganismExists(*org))
+            continue;
+        org->action();
+    }
+    turn++;
+}
+
+bool World::isWorldFull() {
+    return organisms.size() == (width * height);
 }

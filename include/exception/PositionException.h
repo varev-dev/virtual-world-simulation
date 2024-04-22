@@ -11,10 +11,10 @@
 
 class PositionException : public std::exception {
 private:
-    std::string message;
+    char* message;
 public:
-    explicit PositionException(std::string msg) : message(std::move(msg)) {}
-    std::string what() {return message;}
+    explicit PositionException(char* msg) : message(msg) {}
+    char* what() const noexcept override {return message;}
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_POSITIONEXCEPTION_H

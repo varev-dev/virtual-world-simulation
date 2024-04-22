@@ -17,6 +17,7 @@ private:
     uint16_t width, height;
     uint32_t turn;
     std::vector<Organism*> organisms;
+    bool doesOrganismExists(Organism& organism);
 public:
     World(uint16_t width, uint16_t height);
 
@@ -29,7 +30,7 @@ public:
     std::vector<Organism*> getOrganisms();
     void removeOrganism(Organism& organism);
     Organism* getOrganismByPosition(uint16_t x, uint16_t y);
-
+    bool isWorldFull();
     void makeTurn();
     void printWorld();
 };
