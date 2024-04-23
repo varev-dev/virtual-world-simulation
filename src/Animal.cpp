@@ -67,7 +67,7 @@ void Animal::collision(Organism &organism) {
     else world->removeOrganism(organism);
 }
 
-bool Animal::birth() {
+bool Animal::birth(uint16_t x, uint16_t y) {
     bool checked[4] = {false,false,false,false};
 
     while (!Organism::isEveryDirectionChecked(checked)) {
@@ -87,21 +87,8 @@ bool Animal::birth() {
             continue;
         }
 
-        Organism* organism;
-
-        if (dynamic_cast<Wolf*>(this))
-            organism = new Wolf(position[X], position[Y], world);
-        else if (dynamic_cast<Fox*>(this))
-            organism = new Fox(position[X], position[Y], world);
-        else if (dynamic_cast<Sheep*>(this))
-            organism = new Sheep(position[X], position[Y], world);
-        else if (dynamic_cast<Turtle*>(this))
-            organism = new Turtle(position[X], position[Y], world);
-        else if (dynamic_cast<Antelope*>(this))
-            organism = new Antelope(position[X], position[Y], world);
-
-        world->addOrganism(*organism);
-        world->addMessage("Urodzone zwierze " + organism->getName());
+        this->birth(position[X], position[Y]);
+        world->addMessage("Urodzone zwierze " + getName());
         lastActionTurn = (int32_t) world->getTurn();
         delete[] position;
         return true;

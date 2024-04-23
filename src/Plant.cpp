@@ -50,9 +50,10 @@ void Plant::action(bool canBeOccupied, bool dodgeStronger) {
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> dis(0, 7);
 
-        if (dis(gen) == 0)
-            world->growPlant(*this, position);
-
+        if (dis(gen) == 0) {
+            grow(position[X], position[Y]);
+            world->addMessage("Zasiano " + getName());
+        }
         delete[] position;
         break;
     }
