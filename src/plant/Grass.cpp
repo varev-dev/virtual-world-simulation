@@ -12,3 +12,7 @@ Grass::Grass(uint16_t x, uint16_t y, World *world) :
     name = "Trawa";
 }
 
+void Grass::grow(uint16_t x, uint16_t y) {
+    world->addOrganism(*(new Grass(x, y, world)));
+}
+

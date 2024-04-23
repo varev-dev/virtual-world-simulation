@@ -21,9 +21,14 @@ Sheep::Sheep(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World *
 }
 
 void Sheep::collision(Organism &organism) {
-    if (auto* other = dynamic_cast<Sheep*>(&organism)) {
-        birth() ? : other->birth();
+    if (dynamic_cast<Sheep*>(&organism)) {
+        Animal::birth();
         return;
     }
     Animal::collision(organism);
+}
+
+bool Sheep::birth(uint16_t x, uint16_t y) {
+    world->addOrganism(*(new Sheep(x, y, world)));
+    return true;
 }

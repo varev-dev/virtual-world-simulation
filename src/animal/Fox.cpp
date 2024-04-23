@@ -21,8 +21,8 @@ Fox::Fox(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World *worl
 }
 
 void Fox::collision(Organism &organism) {
-    if (auto* other = dynamic_cast<Fox*>(&organism)) {
-        birth() ? : other->birth();
+    if (dynamic_cast<Fox*>(&organism)) {
+        Animal::birth();
         return;
     }
     Animal::collision(organism);
@@ -30,4 +30,9 @@ void Fox::collision(Organism &organism) {
 
 void Fox::action(bool canBeOccupied, bool dodgeStronger) {
     Animal::action(canBeOccupied, dodgeStronger);
+}
+
+bool Fox::birth(uint16_t x, uint16_t y) {
+    world->addOrganism(*(new Fox(x, y, world)));
+    return true;
 }

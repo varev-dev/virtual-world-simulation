@@ -15,3 +15,7 @@ Belladonna::Belladonna(uint16_t x, uint16_t y, World *world) :
 void Belladonna::collision(Organism &organism) {
     world->removeOrganism(organism);
 }
+
+void Belladonna::grow(uint16_t x, uint16_t y) {
+    world->addOrganism(*(new Belladonna(x, y, world)));
+}

@@ -19,7 +19,7 @@ public:
 
     void action(bool canBeOccupied = true, bool dodgeStronger = false) override;
     void collision(Organism& organism) override;
-    bool birth();
+    virtual bool birth(uint16_t x = -1, uint16_t y = -1);
     static Organism* createRandom(uint16_t x, uint16_t y, World& world);
 };
 

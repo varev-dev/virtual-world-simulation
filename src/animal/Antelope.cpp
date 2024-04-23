@@ -27,6 +27,10 @@ void Antelope::action(bool canBeOccupied, bool dodgeStronger) {
 }
 
 void Antelope::collision(Organism &organism) {
+    if (dynamic_cast<Antelope*>(&organism)) {
+        Animal::birth();
+        return;
+    }
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, 1);
@@ -36,4 +40,9 @@ void Antelope::collision(Organism &organism) {
 
     if (random == 0) Animal::action(false);
     if (random || (oldX == x && oldY == y)) Animal::collision(organism);
+}
+
+bool Antelope::birth(uint16_t x, uint16_t y) {
+    world->addOrganism(*(new Antelope(x, y, world)));
+    return true;
 }

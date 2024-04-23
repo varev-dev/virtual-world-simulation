@@ -10,9 +10,9 @@
 class Antelope : public Animal {
 public:
     Antelope(uint16_t x, uint16_t y, World *world);
-
     Antelope(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World *world);
 
+    bool birth(uint16_t x, uint16_t y) override;
     void action(bool canBeOccupied, bool dodgeStronger) override;
     void collision(Organism &organism) override;
 

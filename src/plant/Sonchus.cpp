@@ -19,3 +19,7 @@ void Sonchus::action(bool canBeOccupied, bool dodgeStronger) {
         Plant::action();
     }
 }
+
+void Sonchus::grow(uint16_t x, uint16_t y) {
+    world->addOrganism(*(new Sonchus(x, y, world)));
+}

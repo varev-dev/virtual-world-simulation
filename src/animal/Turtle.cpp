@@ -23,11 +23,10 @@ Turtle::Turtle(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World
 }
 
 void Turtle::collision(Organism &organism) {
-    if (auto* other = dynamic_cast<Turtle*>(&organism)) {
-        birth() ?: other->birth();
+    if (dynamic_cast<Turtle*>(&organism)) {
+        Animal::birth();
         return;
     }
-
     if (organism.getPower() < MAX_POWER_TO_IGNORE) return;
     Animal::collision(organism);
 }
@@ -38,6 +37,11 @@ void Turtle::action(bool canBeOccupied, bool dodgeStronger) {
     std::uniform_int_distribution<> dis(0, 3);
 
     if (dis(gen) == 0) Animal::action();
+}
+
+bool Turtle::birth(uint16_t x, uint16_t y) {
+    world->addOrganism(*(new Turtle(x, y, world)));
+    return true;
 }
 
 

@@ -21,9 +21,14 @@ Wolf::Wolf(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World *wo
 }
 
 void Wolf::collision(Organism &organism) {
-    if (auto* other = dynamic_cast<Wolf*>(&organism)) {
-        birth() ? : other->birth();
+    if (dynamic_cast<Wolf*>(&organism)) {
+        Animal::birth();
         return;
     }
     Animal::collision(organism);
+}
+
+bool Wolf::birth(uint16_t x, uint16_t y) {
+    world->addOrganism(*(new Wolf(x, y, world)));
+    return true;
 }

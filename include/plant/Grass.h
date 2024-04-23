@@ -10,6 +10,7 @@
 class Grass : public Plant {
 public:
     Grass(uint16_t x, uint16_t y, World *world);
+    void grow(uint16_t x, uint16_t y) override;
     static char ID;
 };
 

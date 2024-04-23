@@ -14,6 +14,7 @@ private:
 public:
     Sonchus(uint16_t x, uint16_t y, World *world);
     void action(bool canBeOccupied, bool dodgeStronger) override;
+    void grow(uint16_t x, uint16_t y) override;
     static char ID;
 };
 

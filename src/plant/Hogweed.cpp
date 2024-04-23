@@ -38,3 +38,7 @@ void Hogweed::action(bool canBeOccupied, bool dodgeStronger) {
 void Hogweed::collision(Organism &organism) {
     world->removeOrganism(organism);
 }
+
+void Hogweed::grow(uint16_t x, uint16_t y) {
+    world->addOrganism(*(new Hogweed(x, y, world)));
+}

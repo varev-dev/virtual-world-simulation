@@ -18,3 +18,7 @@ void Guarana::collision(Organism &organism) {
     world->removeOrganism(*this);
     Plant::collision(organism);
 }
+
+void Guarana::grow(uint16_t x, uint16_t y) {
+    world->addOrganism(*(new Guarana(x, y, world)));
+}

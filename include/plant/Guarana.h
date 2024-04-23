@@ -13,6 +13,7 @@ private:
 public:
     Guarana(uint16_t x, uint16_t y, World *world);
     void collision(Organism& organism) override;
+    void grow(uint16_t x, uint16_t y) override;
     static char ID;
 };
 
