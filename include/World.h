@@ -18,6 +18,7 @@ private:
     uint16_t width, height;
     int32_t turn;
     std::vector<Organism*> organisms;
+    std::vector<std::string> messages;
     Organism* human;
 
     bool doesOrganismExists(Organism& organism);
@@ -33,6 +34,7 @@ public:
 
     void growPlant(Organism& organism, uint16_t* position);
     void addOrganism(Organism& organism);
+    void addMessage(const std::string& message);
     std::vector<Organism*> getOrganisms();
     void removeOrganism(Organism& organism);
     Organism* getOrganismByPosition(uint16_t x, uint16_t y);

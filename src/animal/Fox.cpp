@@ -10,12 +10,14 @@ Fox::Fox(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
     sign = 'F';
     power = 3;
     initiative = 7;
+    name = "Lis";
 }
 
 Fox::Fox(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World *world)
         : Animal(x, y, power, initiative, world) {
     sign = 'F';
     this->initiative = 7;
+    name = "Lis";
 }
 
 void Fox::collision(Organism &organism) {

@@ -11,6 +11,7 @@ Sonchus::Sonchus(uint16_t x, uint16_t y, World *world) :
         Plant(x, y, world) {
     sign = 's';
     sowChance = 5;
+    name = "Mlecz";
 }
 
 void Sonchus::action(bool canBeOccupied, bool dodgeStronger) {

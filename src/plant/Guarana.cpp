@@ -10,6 +10,7 @@ uint8_t Guarana::STRENGTH_INCREASE = 3;
 Guarana::Guarana(uint16_t x, uint16_t y, World *world) :
         Plant(x, y, world) {
     sign = 'g';
+    name = "Guarana";
 };
 
 void Guarana::collision(Organism &organism) {

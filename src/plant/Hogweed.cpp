@@ -11,6 +11,7 @@ Hogweed::Hogweed(uint16_t x, uint16_t y, World *world) :
         Plant(x, y, world) {
     power = 10;
     sign = 'h';
+    name = "Barszcz sosnowskiego";
 }
 
 void Hogweed::action(bool canBeOccupied, bool dodgeStronger) {

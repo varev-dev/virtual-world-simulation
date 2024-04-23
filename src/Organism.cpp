@@ -12,7 +12,7 @@ int32_t Organism::JUST_BORN = -2;
 int32_t Organism::FREE = -1;
 
 Organism::Organism(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World* world) :
-        x(x), y(y), power(power), initiative(initiative), world(world) {};
+        x(x), y(y), power(power), initiative(initiative), world(world), name("Organizm") {};
 
 Organism::~Organism() = default;
 
@@ -98,4 +98,8 @@ void Organism::setLastActionTurn(int32_t turn) {
 
 void Organism::setLastActionTurn() {
     lastActionTurn = world->getTurn();
+}
+
+std::string Organism::getName() {
+    return this->name;
 }

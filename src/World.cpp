@@ -14,6 +14,7 @@
 #include "../include/plant/Sonchus.h"
 #include "../include/Human.h"
 #include "../include/Animal.h"
+#include "../include/animal/Wolf.h"
 
 uint8_t World::PERCENT_OF_PLANTS = 12,
         World::PERCENT_OF_ANIMALS = 15;
@@ -78,6 +79,12 @@ void World::printWorld() {
         std::cout << std::endl;
     }
     std::cout << std::endl;
+
+    for (const auto& message : messages) {
+        std::cout << message << std::endl;
+    }
+
+    messages.clear();
 }
 
 void World::removeOrganism(Organism &organism) {
@@ -90,16 +97,20 @@ void World::removeOrganism(Organism &organism) {
 }
 
 void World::growPlant(Organism &organism, uint16_t *position) {
-    if (dynamic_cast<Belladonna*>(&organism))
-        addOrganism(*(new Belladonna(position[X], position[Y], this)));
-    else if (dynamic_cast<Sonchus*>(&organism))
-        addOrganism(*(new Sonchus(position[X], position[Y], this)));
-    else if (dynamic_cast<Hogweed*>(&organism))
-        addOrganism(*(new Hogweed(position[X], position[Y], this)));
+    Organism* org;
+    if (dynamic_cast<Belladonna *>(&organism))
+        org = new Belladonna(position[X], position[Y], this);
+    else if (dynamic_cast<Sonchus *>(&organism))
+        org = new Sonchus(position[X], position[Y], this);
+    else if (dynamic_cast<Hogweed *>(&organism))
+        org = new Hogweed(position[X], position[Y], this);
     else if (dynamic_cast<Guarana*>(&organism))
-        addOrganism(*(new Guarana(position[X], position[Y], this)));
+        org = new Guarana(position[X], position[Y], this);
     else if (dynamic_cast<Grass*>(&organism))
-        addOrganism(*(new Grass(position[X], position[Y], this)));
+        org = new Grass(position[X], position[Y], this);
+
+    addOrganism(*org);
+    addMessage("Zasiano " + org->getName());
 }
 
 bool World::doesOrganismExists(Organism& organism) {
@@ -164,20 +175,25 @@ void World::initOrganisms() {
 
     uint16_t position[2];
 
-    this->human = new Human(width/2, height/2, this);
+    this->human = new Human(0, 1, this);
     addOrganism(*human);
-    for (int i = 0; i < animals + plants;) {
-        position[X] = x(gen);
-        position[Y]= y(gen);
-
-        if (getOrganismByPosition(position[X], position[Y])) continue;
-        else i++;
-
-        if (i < animals) addOrganism(*(Animal::createRandom(position[X], position[Y], *this)));
-        else addOrganism(*(Plant::createRandom(position[X], position[Y], *this)));
-    }
+    addOrganism(*(new Wolf(0, 0, this)));
+    //    for (int i = 0; i < animals + plants;) {
+//        position[X] = x(gen);
+//        position[Y]= y(gen);
+//
+//        if (getOrganismByPosition(position[X], position[Y])) continue;
+//        else i++;
+//
+//        if (i < animals) addOrganism(*(Animal::createRandom(position[X], position[Y], *this)));
+//        else addOrganism(*(Plant::createRandom(position[X], position[Y], *this)));
+//    }
 }
 
 Organism* World::getHuman() {
     return this->human;
+}
+
+void World::addMessage(const std::string& message) {
+    messages.push_back(message);
 }

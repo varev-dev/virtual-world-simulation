@@ -6,6 +6,7 @@
 #define VIRTUAL_WORLD_SIMULATION_ORGANISM_H
 
 #include <cinttypes>
+#include <string>
 #include "Direction.h"
 
 #include "World.h"
@@ -15,6 +16,7 @@ class Organism {
 protected:
     uint8_t sign = 'U';
     uint16_t x, y;
+    std::string name;
     uint8_t power, initiative;
     World* world;
     int32_t lastActionTurn = -1;
@@ -32,6 +34,7 @@ public:
     int32_t getLastActionTurn() const;
     void setLastActionTurn(int32_t turn);
     void setLastActionTurn();
+    std::string getName();
     uint16_t getX() const;
     uint16_t getY() const;
     uint8_t getPower() const;

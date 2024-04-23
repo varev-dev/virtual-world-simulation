@@ -11,14 +11,14 @@ Antelope::Antelope(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
     sign = 'A';
     power = 4;
     initiative = 4;
+    name = "Antylopa";
 }
 
 Antelope::Antelope(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World *world)
         : Animal(x, y, power, initiative, world) {
     sign = 'A';
-    this->power = power;
     this->initiative = 4;
-    lastActionTurn = initiative;
+    name = "Antylopa";
 }
 
 void Antelope::action(bool canBeOccupied, bool dodgeStronger) {

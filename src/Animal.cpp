@@ -62,6 +62,7 @@ void Animal::action(bool canBeOccupied, bool dodgeStronger) {
 }
 
 void Animal::collision(Organism &organism) {
+    world->addMessage("Kolizja " + this->name + " " + organism.getName());
     if (power <= organism.getPower()) world->removeOrganism(*this);
     else world->removeOrganism(organism);
 }
@@ -100,6 +101,7 @@ bool Animal::birth() {
             organism = new Antelope(position[X], position[Y], world);
 
         world->addOrganism(*organism);
+        world->addMessage("Urodzone zwierze " + organism->getName());
         lastActionTurn = (int32_t) world->getTurn();
         delete[] position;
         return true;
