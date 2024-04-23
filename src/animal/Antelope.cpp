@@ -33,10 +33,7 @@ void Antelope::collision(Organism &organism) {
             uint16_t* position = newPosition(dir);
 
             if (position[X] == x && position[Y] == y) continue;
-
-            Organism* collider = world->getOrganismByPosition(position[X], position[Y]);
-
-            if (collider) continue;
+            if (world->getOrganismByPosition(position[X], position[Y])) continue;
 
             updatePosition(position);
 
