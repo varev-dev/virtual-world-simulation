@@ -12,7 +12,7 @@ Sheep::Sheep(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
     initiative = 4;
 }
 
-Sheep::Sheep(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World *world)
+Sheep::Sheep(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World *world)
         : Animal(x, y, power, initiative, world) {
     sign = 'P';
     this->initiative = 4;

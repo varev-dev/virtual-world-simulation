@@ -8,6 +8,8 @@
 #include "Organism.h"
 #include "Plant.h"
 
+class World;
+
 class Animal : public Organism {
 public:
     static char DERIVED;

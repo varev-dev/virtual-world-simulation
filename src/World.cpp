@@ -12,6 +12,7 @@
 #include "../include/plant/Hogweed.h"
 #include "../include/plant/Guarana.h"
 #include "../include/plant/Sonchus.h"
+#include "../include/Human.h"
 #include "../include/Animal.h"
 
 uint8_t World::PERCENT_OF_PLANTS = 12,
@@ -163,8 +164,8 @@ void World::initOrganisms() {
 
     uint16_t position[2];
 
-
-
+    this->human = new Human(width/2, height/2, this);
+    addOrganism(*human);
     for (int i = 0; i < animals + plants;) {
         position[X] = x(gen);
         position[Y]= y(gen);
@@ -175,4 +176,8 @@ void World::initOrganisms() {
         if (i < animals) addOrganism(*(Animal::createRandom(position[X], position[Y], *this)));
         else addOrganism(*(Plant::createRandom(position[X], position[Y], *this)));
     }
+}
+
+Organism* World::getHuman() {
+    return this->human;
 }

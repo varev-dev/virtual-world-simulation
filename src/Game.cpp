@@ -7,6 +7,7 @@
 #include <fstream>
 
 #include "../include/Game.h"
+#include "../include/Human.h"
 
 std::filesystem::path Game::SAVE_PATH = "saves";
 char Game::EXIT_KEY = 'E';
@@ -59,11 +60,23 @@ void Game::loadWorld() {
 
 }
 
+bool isMoveKey(int input) {
+    return input == 'W' || input == 'S' || input == 'A' || input == 'D';
+}
+
 void Game::simulate() {
     int input = 0;
     while (input != EXIT_KEY) {
+        world->printWorld();
         input = getchar();
 
         if (input == NEXT_TURN_KEY) world->makeTurn();
+        if (isMoveKey(input) || input == Game::USE_SKILL_KEY) {
+            if (!world->getHuman()) continue;
+
+            auto* human = dynamic_cast<Human*>(world->getHuman());
+            human->setOption(input);
+            world->makeTurn();
+        }
     }
 }

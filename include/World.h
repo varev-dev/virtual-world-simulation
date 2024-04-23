@@ -10,6 +10,7 @@
 #include <memory>
 
 #include "Organism.h"
+
 class Organism;
 
 class World {
@@ -17,14 +18,18 @@ private:
     uint16_t width, height;
     int32_t turn;
     std::vector<Organism*> organisms;
+    Organism* human;
+
     bool doesOrganismExists(Organism& organism);
     static uint8_t PERCENT_OF_PLANTS, PERCENT_OF_ANIMALS;
+
 public:
     World(uint16_t width, uint16_t height);
     void initOrganisms();
     uint16_t getWidth() const;
     uint16_t getHeight() const;
     int32_t getTurn() const;
+    Organism* getHuman();
 
     void growPlant(Organism& organism, uint16_t* position);
     void addOrganism(Organism& organism);

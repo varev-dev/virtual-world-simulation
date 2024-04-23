@@ -30,6 +30,7 @@ void Human::action(bool canBeOccupied, bool dodgeStronger) {
     else if (option == 'D') dir = EAST;
     else return;
 
+    option = 0;
     uint16_t* position = newPosition(dir);
 
     Organism* collider = world->getOrganismByPosition(position[X], position[Y]);
