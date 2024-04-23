@@ -6,16 +6,19 @@
 #define VIRTUAL_WORLD_SIMULATION_GAME_H
 
 #include "World.h"
+#include <fstream>
+#include <filesystem>
 
 class Game {
 private:
     World* world;
     static std::filesystem::path SAVE_PATH;
 public:
-    Game(World *world);
+    Game();
     void createWorld();
     bool saveWorld();
     void loadWorld();
+    void simulate();
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_GAME_H

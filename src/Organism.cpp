@@ -6,11 +6,7 @@
 
 #include <string>
 #include <random>
-#include <iostream>
-#include <filesystem>
 #include <fstream>
-
-#include "../include/exception/PositionException.h"
 
 int32_t Organism::JUST_BORN = -2;
 int32_t Organism::FREE = -1;
@@ -44,10 +40,6 @@ uint16_t* Organism::newPosition(direction dir) {
     return new uint16_t[2]{newX,newY};
 }
 
-World* Organism::getWorld() const {
-    return world;
-}
-
 uint16_t Organism::getX() const {
     return x;
 }
@@ -77,7 +69,7 @@ std::ofstream& operator<<(std::ofstream& ofs, const Organism& organism) {
     message.append(std::to_string((char)organism.sign) + " ");
     message.append(std::to_string(organism.x) + " " + std::to_string(organism.y) + " ");
     message.append(std::to_string(organism.power) + " " + std::to_string(organism.initiative) + " ");
-    ofs << message << std::endl;
+    ofs << message;
     return ofs;
 }
 

@@ -18,8 +18,6 @@ protected:
     uint8_t power, initiative;
     World* world;
     int32_t lastActionTurn = -1;
-    static int32_t JUST_BORN;
-    static int32_t FREE;
 
     Organism(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World* world);
     ~Organism();
@@ -43,6 +41,9 @@ public:
     uint16_t* newPosition(direction dir);
 
     friend std::ofstream& operator<<(std::ofstream& os, const Organism& organism);
+
+    static int32_t JUST_BORN;
+    static int32_t FREE;
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_ORGANISM_H

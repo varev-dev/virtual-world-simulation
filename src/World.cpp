@@ -2,9 +2,10 @@
 // Created by varev on 20.04.2024.
 //
 
+#include "../include/World.h"
+
 #include <iostream>
 #include <random>
-#include "../include/World.h"
 
 #include "../include/plant/Belladonna.h"
 #include "../include/plant/Grass.h"
@@ -113,8 +114,8 @@ void World::makeTurn() {
 
     for (auto* org : organisms) {
         if (auto* animal = dynamic_cast<Animal*>(org)) {
-            if (animal->getLastActionTurn() == Animal::JUST_BORN)
-                animal->setLastActionTurn(Animal::FREE);
+            if (animal->getLastActionTurn() == Organism::JUST_BORN)
+                animal->setLastActionTurn(Organism::FREE);
         }
     }
 

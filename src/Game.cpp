@@ -10,7 +10,7 @@
 
 std::filesystem::path Game::SAVE_PATH = "saves";
 
-Game::Game(World *world) : world(world) {}
+Game::Game() = default;
 
 void Game::createWorld() {
     uint16_t w = 0, h = 0;
@@ -23,5 +23,39 @@ void Game::createWorld() {
     }
 
     world = new World(w, h);
+    world->initOrganisms();
 }
 
+bool Game::saveWorld() {
+    std::string fn;
+    std::cout << "Enter filename: ";
+    std::cin >> fn;
+
+    if (!std::filesystem::exists(Game::SAVE_PATH))
+        std::filesystem::create_directory(Game::SAVE_PATH);
+
+    fn.append(".save");
+    std::filesystem::path filepath = Game::SAVE_PATH / fn;
+    std::ofstream file(filepath);
+
+    if (!file.is_open()) {
+        std::cerr << "Failed to create file" << filepath << std::endl;
+        return false;
+    }
+
+    file << world->getTurn() << " " << world->getWidth() << " " << world->getHeight() << "\n";
+
+    for (auto* org : world->getOrganisms())
+        file << *org << std::endl;
+
+    file.close();
+    return true;
+}
+
+void Game::loadWorld() {
+
+}
+
+void Game::simulate() {
+
+}
