@@ -14,8 +14,6 @@
 #include "../include/animal/Turtle.h"
 
 char Animal::DERIVED = 0;
-int32_t Animal::JUST_BORN = -2;
-int32_t Animal::FREE = -1;
 
 Animal::Animal(uint16_t x, uint16_t y, World *world) :
         Organism(x, y, 1, 1, world) {
@@ -96,18 +94,6 @@ bool Animal::birth() {
         return true;
     }
     return false;
-}
-
-int32_t Animal::getLastActionTurn() const {
-    return lastActionTurn;
-}
-
-void Animal::setLastActionTurn(int32_t turn) {
-    lastActionTurn = turn;
-}
-
-void Animal::setLastActionTurn() {
-    lastActionTurn = world->getTurn();
 }
 
 Organism *Animal::createRandom(uint16_t x, uint16_t y, World& world) {

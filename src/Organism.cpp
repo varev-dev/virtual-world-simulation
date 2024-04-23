@@ -6,8 +6,14 @@
 
 #include <string>
 #include <random>
+#include <iostream>
+#include <filesystem>
+#include <fstream>
 
 #include "../include/exception/PositionException.h"
+
+int32_t Organism::JUST_BORN = -2;
+int32_t Organism::FREE = -1;
 
 Organism::Organism(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World* world) :
         x(x), y(y), power(power), initiative(initiative), world(world) {};
@@ -66,12 +72,13 @@ uint8_t Organism::getSign() {
     return sign;
 }
 
-std::ostream& operator<<(std::ostream& os, const Organism &organism) {
+std::ofstream& operator<<(std::ofstream& ofs, const Organism& organism) {
     std::string message;
-    message = organism.sign;
-    message.append(" (" + std::to_string(organism.x) + "; " + std::to_string(organism.y) + ")");
-    os << message;
-    return os;
+    message.append(std::to_string((char)organism.sign) + " ");
+    message.append(std::to_string(organism.x) + " " + std::to_string(organism.y) + " ");
+    message.append(std::to_string(organism.power) + " " + std::to_string(organism.initiative) + " ");
+    ofs << message << std::endl;
+    return ofs;
 }
 
 bool Organism::isEveryDirectionChecked(const bool *directions) {
@@ -88,4 +95,16 @@ direction Organism::getRandomDirection() {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dis(0, 3);
     return direction(dis(gen));
+}
+
+int32_t Organism::getLastActionTurn() const {
+    return lastActionTurn;
+}
+
+void Organism::setLastActionTurn(int32_t turn) {
+    lastActionTurn = turn;
+}
+
+void Organism::setLastActionTurn() {
+    lastActionTurn = world->getTurn();
 }

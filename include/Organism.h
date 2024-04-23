@@ -17,26 +17,32 @@ protected:
     uint16_t x, y;
     uint8_t power, initiative;
     World* world;
+    int32_t lastActionTurn = -1;
+    static int32_t JUST_BORN;
+    static int32_t FREE;
+
     Organism(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World* world);
     ~Organism();
     static direction getRandomDirection();
     static bool isEveryDirectionChecked(const bool* directions);
 
 public:
-    virtual void action() = 0;
+    virtual void action(bool canBeOccupied) = 0;
     virtual void collision(Organism& organism) = 0;
+    virtual uint8_t getSign();
 
-    World* getWorld() const;
+    int32_t getLastActionTurn() const;
+    void setLastActionTurn(int32_t turn);
+    void setLastActionTurn();
     uint16_t getX() const;
     uint16_t getY() const;
     uint8_t getPower() const;
     uint8_t getInitiative() const;
-    virtual uint8_t getSign();
-
     void setPower(uint8_t power);
     void updatePosition(const uint16_t position[2]);
     uint16_t* newPosition(direction dir);
-    friend std::ostream& operator<<(std::ostream& os, const Organism& organism);
+
+    friend std::ofstream& operator<<(std::ofstream& os, const Organism& organism);
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_ORGANISM_H
