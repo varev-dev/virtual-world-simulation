@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <random>
 #include "../include/World.h"
 
 #include "../include/plant/Belladonna.h"
@@ -11,6 +12,9 @@
 #include "../include/plant/Guarana.h"
 #include "../include/plant/Sonchus.h"
 #include "../include/Animal.h"
+
+uint8_t World::PERCENT_OF_PLANTS = 12,
+        World::PERCENT_OF_ANIMALS = 15;
 
 World::World(uint16_t width, uint16_t height) : width(width), height(height), turn(0) {}
 
@@ -114,12 +118,25 @@ void World::makeTurn() {
         }
     }
 
-    for (auto* org : organisms) {
-        if (!doesOrganismExists(*org)) continue;
-        if (auto* animal = dynamic_cast<Animal*>(org))
-            if (animal->getLastActionTurn() == Animal::JUST_BORN) continue;
-        org->action();
-        break;
+    size_t id = 0;
+    while (true) {
+        if (id >= organisms.size())
+            break;
+        Organism& org = *organisms[id];
+        if (!doesOrganismExists(*organisms[id])) {
+            id++;
+            continue;
+        }
+        if (auto* animal = dynamic_cast<Animal*>(organisms[id])) {
+            if (animal->getLastActionTurn() == Animal::JUST_BORN) {
+                id++;
+                continue;
+            }
+        }
+        organisms[id]->action(true);
+
+        if (&org == organisms[id])
+            id++;
     }
 }
 
@@ -134,4 +151,28 @@ bool World::isPositionLegal(uint16_t x, uint16_t y) const {
         return false;
 
     return true;
+}
+
+void World::initOrganisms() {
+    int animals = width * height * PERCENT_OF_ANIMALS / 100;
+    int plants = width * height * PERCENT_OF_PLANTS / 100;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> x(0, width-1), y(0, height-1);
+
+    uint16_t position[2];
+
+
+
+    for (int i = 0; i < animals + plants;) {
+        position[X] = x(gen);
+        position[Y]= y(gen);
+
+        if (getOrganismByPosition(position[X], position[Y])) continue;
+        else i++;
+
+        if (i < animals) addOrganism(*(Animal::createRandom(position[X], position[Y], *this)));
+        else addOrganism(*(Plant::createRandom(position[X], position[Y], *this)));
+    }
 }

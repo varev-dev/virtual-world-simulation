@@ -2,20 +2,18 @@
 #include <iostream>
 #include <unistd.h>
 #include "include/World.h"
-#include "include/Animal.h"
-#include "include/plant/Guarana.h"
-#include "include/plant/Hogweed.h"
-#include "include/animal/Fox.h"
-#include "include/animal/Wolf.h"
 
 int main() {
-    auto* world = new World(1,2);
-    auto* animal = new Fox(0, 1, world);
-    auto* animal2 = new Wolf(0, 0, world);
-    //auto* plant = new Hogweed(2, 0, world);
+    uint16_t width = 0, height = 0;
+    std::cout << "Enter width: ";
+    std::cin >> width;
+    std::cout << "Enter height: ";
+    std::cin >> height;
+    if (width < 1 || height < 1)
+        return 0;
 
-    world->addOrganism(*animal);
-    world->addOrganism(*animal2);
+    auto* world = new World(width, height);
+    world->initOrganisms();
 
     while (true) {
         world->printWorld();

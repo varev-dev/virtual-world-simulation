@@ -18,9 +18,10 @@ private:
     int32_t turn;
     std::vector<Organism*> organisms;
     bool doesOrganismExists(Organism& organism);
+    static uint8_t PERCENT_OF_PLANTS, PERCENT_OF_ANIMALS;
 public:
     World(uint16_t width, uint16_t height);
-
+    void initOrganisms();
     uint16_t getWidth() const;
     uint16_t getHeight() const;
     int32_t getTurn() const;
