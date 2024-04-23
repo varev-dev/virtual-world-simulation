@@ -1,25 +1,30 @@
 //#pragma once
 #include <iostream>
 #include <unistd.h>
-#include "include/World.h"
+#include <ncurses.h>
+#include "include/Game.h"
 
 int main() {
-    uint16_t width = 0, height = 0;
-    std::cout << "Enter width: ";
-    std::cin >> width;
-    std::cout << "Enter height: ";
-    std::cin >> height;
-    if (width < 1 || height < 1)
-        return 0;
+    //initscr();
+    //raw();
+    //keypad(stdscr, TRUE);
 
-    auto* world = new World(width, height);
-    world->initOrganisms();
+    Game game = Game();
+    game.createWorld();
+    game.saveWorld();
 
-    while (true) {
-        world->printWorld();
-        world->makeTurn();
-        usleep(500000);
-    }
+//    world->initOrganisms();
+//
+//    char input = '\0';
+//    while (input != 'K' && input != 'k') {
+//        world->printWorld();
+//        input = getch();
+//
+//        if (input == 'P' || input == 'p')
+//            world->makeTurn();
+//        usleep(500000);
+//    }
 
+    //endwin();
     return 0;
 }
