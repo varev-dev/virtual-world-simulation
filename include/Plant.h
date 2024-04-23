@@ -9,13 +9,14 @@
 
 class Plant : public Organism {
 protected:
-    static char DERIVED;
     uint8_t sowChance = 3; // higher - smaller chance to sow
 public:
     Plant(uint16_t x, uint16_t y, World* world);
     static Organism* createRandom(uint16_t x, uint16_t y, World& world);
-    void action(bool canBeOccupied = false) override;
+    void action(bool canBeOccupied = false, bool dodgeStronger = false) override;
     void collision(Organism& organism) override;
+
+    static char DERIVED;
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_PLANT_H

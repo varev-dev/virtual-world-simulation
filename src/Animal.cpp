@@ -21,7 +21,7 @@ Animal::Animal(uint16_t x, uint16_t y, World *world) :
     lastActionTurn = world->getTurn() ? JUST_BORN : FREE;
 }
 
-void Animal::action(bool canBeOccupied) {
+void Animal::action(bool canBeOccupied, bool dodgeStronger) {
     bool checked[4] = {false, false, false, false};
     while (!Organism::isEveryDirectionChecked(checked)) {
         direction dir = getRandomDirection();
@@ -36,10 +36,11 @@ void Animal::action(bool canBeOccupied) {
 
         Organism* collider = world->getOrganismByPosition(position[X], position[Y]);
 
-        if (!canBeOccupied && collider) {
-            delete[] position;
+        if (!canBeOccupied && collider)
             continue;
-        }
+
+        if (dodgeStronger && collider->getPower() > power)
+            continue;
 
         if (canBeOccupied && collider) {
             collider->collision(*this);

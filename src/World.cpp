@@ -121,8 +121,7 @@ void World::makeTurn() {
 
     size_t id = 0;
     while (true) {
-        if (id >= organisms.size())
-            break;
+        if (id >= organisms.size()) break;
         Organism& org = *organisms[id];
         if (!doesOrganismExists(*organisms[id])) {
             id++;
@@ -134,7 +133,7 @@ void World::makeTurn() {
                 continue;
             }
         }
-        organisms[id]->action(true);
+        organisms[id]->action(true, false);
 
         if (&org == organisms[id])
             id++;

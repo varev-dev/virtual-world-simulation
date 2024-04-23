@@ -11,7 +11,7 @@
 class Hogweed : public Plant {
 public:
     Hogweed(uint16_t x, uint16_t y, World *world);
-    void action(bool canBeOccupied) override;
+    void action(bool canBeOccupied, bool dodgeStronger) override;
     void collision(Organism& organism) override;
     static char ID;
 };

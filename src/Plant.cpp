@@ -15,7 +15,7 @@ char Plant::DERIVED = 0;
 
 Plant::Plant(uint16_t x, uint16_t y, World *world) :
         Organism(x, y, 0, 0, world) {
-    Organism::sign = 'P';
+    Organism::sign = 'p';
 };
 
 void Plant::collision(Organism &organism) {
@@ -25,7 +25,7 @@ void Plant::collision(Organism &organism) {
     delete[] position;
 }
 
-void Plant::action(bool canBeOccupied) {
+void Plant::action(bool canBeOccupied, bool dodgeStronger) {
     bool checked[4] = {false,false,false,false};
     while (!Organism::isEveryDirectionChecked(checked)) {
         direction random = getRandomDirection();

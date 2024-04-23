@@ -81,7 +81,6 @@ bool Organism::isEveryDirectionChecked(const bool *directions) {
     return true;
 }
 
-
 direction Organism::getRandomDirection() {
     std::random_device rd;
     std::mt19937 gen(rd());

@@ -13,7 +13,7 @@ Sonchus::Sonchus(uint16_t x, uint16_t y, World *world) :
     sowChance = 5;
 }
 
-void Sonchus::action(bool canBeOccupied) {
+void Sonchus::action(bool canBeOccupied, bool dodgeStronger) {
     for (int i = 0; i < SPREAD_ATTEMPTS; i++) {
         Plant::action();
     }

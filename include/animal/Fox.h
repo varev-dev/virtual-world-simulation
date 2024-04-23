@@ -11,7 +11,7 @@ class Fox : public Animal {
 public:
     Fox(uint16_t x, uint16_t y, World *world);
     void collision(Organism &organism) override;
-    void action(bool canBeOccupied) override;
+    void action(bool canBeOccupied, bool dodgeStronger) override;
 
     static char ID;
 };

@@ -13,7 +13,7 @@ Hogweed::Hogweed(uint16_t x, uint16_t y, World *world) :
     sign = 'h';
 }
 
-void Hogweed::action(bool canBeOccupied) {
+void Hogweed::action(bool canBeOccupied, bool dodgeStronger) {
     for (int i = 0; i < EAST; i++) {
         uint16_t* pos = newPosition((direction) i);
 

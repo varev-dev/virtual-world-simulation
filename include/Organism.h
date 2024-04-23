@@ -25,7 +25,7 @@ protected:
     static bool isEveryDirectionChecked(const bool* directions);
 
 public:
-    virtual void action(bool canBeOccupied) = 0;
+    virtual void action(bool canBeOccupied, bool dodgeStronger) = 0;
     virtual void collision(Organism& organism) = 0;
     virtual uint8_t getSign();
 
