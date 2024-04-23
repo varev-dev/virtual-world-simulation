@@ -120,7 +120,7 @@ bool Game::loadWorld() {
         while (iss >> num) param.push_back(num);
 
         if (param.size() == 5)
-            initBySign((char) param[0], param[1], param[2], (uint8_t) param[3], param[4], *world);
+            initBySign((char) param[0], param[1], param[2], (uint8_t) param[3], param[4]);
     }
 
     file.close();

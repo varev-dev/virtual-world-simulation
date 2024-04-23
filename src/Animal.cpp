@@ -17,13 +17,13 @@ char Animal::DERIVED = 0;
 
 Animal::Animal(uint16_t x, uint16_t y, World *world) :
         Organism(x, y, 1, 1, world) {
-    Organism::sign = 'A';
+    Organism::sign = 'L';
     lastActionTurn = world->getTurn() ? JUST_BORN : FREE;
 }
 
 Animal::Animal(uint16_t x, uint16_t y, uint8_t power, uint16_t action, World *world)
         : Organism(x, y, power, 1, world) {
-    Organism::sign = 'A';
+    Organism::sign = 'L';
     lastActionTurn = action;
 }
 

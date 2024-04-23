@@ -8,6 +8,7 @@
 #include <random>
 
 #include "../include/Human.h"
+#include "../include/animal/Wolf.h"
 
 uint8_t World::PERCENT_OF_PLANTS = 12,
         World::PERCENT_OF_ANIMALS = 15;
@@ -151,19 +152,19 @@ void World::initOrganisms() {
 
     uint16_t position[2];
 
-    this->human = new Human(width/2, height/2, this);
+    this->human = new Human(0, 1, this);
     addOrganism(*human);
-
-    for (int i = 0; i < animals + plants;) {
-        position[X] = x(gen);
-        position[Y]= y(gen);
-
-        if (getOrganismByPosition(position[X], position[Y])) continue;
-        else i++;
-
-        if (i < animals) addOrganism(*(Animal::createRandom(position[X], position[Y], *this)));
-        else addOrganism(*(Plant::createRandom(position[X], position[Y], *this)));
-    }
+    addOrganism(*(new Wolf(0, 0, this)));
+//    for (int i = 0; i < animals + plants;) {
+//        position[X] = x(gen);
+//        position[Y]= y(gen);
+//
+//        if (getOrganismByPosition(position[X], position[Y])) continue;
+//        else i++;
+//
+//        if (i < animals) addOrganism(*(Animal::createRandom(position[X], position[Y], *this)));
+//        else addOrganism(*(Plant::createRandom(position[X], position[Y], *this)));
+//    }
 }
 
 Organism* World::getHuman() {

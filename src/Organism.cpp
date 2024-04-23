@@ -68,7 +68,7 @@ std::ofstream& operator<<(std::ofstream& ofs, const Organism& organism) {
     std::string message;
     message.append(std::to_string((char)organism.sign) + " ");
     message.append(std::to_string(organism.x) + " " + std::to_string(organism.y) + " ");
-    message.append(std::to_string(organism.power) + " " + std::to_string(organism.initiative) + " ");
+    message.append(std::to_string(organism.power) + " " + std::to_string(organism.lastActionTurn) + " ");
     ofs << message;
     return ofs;
 }
