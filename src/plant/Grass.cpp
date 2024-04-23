@@ -4,8 +4,10 @@
 
 #include "../../include/plant/Grass.h"
 
+char Grass::ID = Plant::DERIVED++;
+
 Grass::Grass(uint16_t x, uint16_t y, World *world) :
         Plant(x, y, world) {
-    sign = 'T';
+    sign = 't';
 }
 

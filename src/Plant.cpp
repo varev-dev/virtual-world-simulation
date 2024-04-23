@@ -5,6 +5,13 @@
 #include <iostream>
 #include <random>
 #include "../include/Plant.h"
+#include "../include/plant/Grass.h"
+#include "../include/plant/Belladonna.h"
+#include "../include/plant/Guarana.h"
+#include "../include/plant/Sonchus.h"
+#include "../include/plant/Hogweed.h"
+
+char Plant::DERIVED = 0;
 
 Plant::Plant(uint16_t x, uint16_t y, World *world) :
         Organism(x, y, 0, 0, world) {
@@ -18,7 +25,7 @@ void Plant::collision(Organism &organism) {
     delete[] position;
 }
 
-void Plant::action() {
+void Plant::action(bool canBeOccupied) {
     bool checked[4] = {false,false,false,false};
     while (!Organism::isEveryDirectionChecked(checked)) {
         direction random = getRandomDirection();
@@ -44,5 +51,24 @@ void Plant::action() {
         delete[] position;
         break;
     }
+}
+
+Organism *Plant::createRandom(uint16_t x, uint16_t y, World& world) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, DERIVED - 1);
+
+    int random = dis(gen);
+
+    if (random == Grass::ID)
+        return new Grass(x, y, &world);
+    else if (random == Belladonna::ID)
+        return new Belladonna(x, y, &world);
+    else if (random == Guarana::ID)
+        return new Guarana(x, y, &world);
+    else if (random == Sonchus::ID)
+        return new Sonchus(x, y, &world);
+    else if (random == Hogweed::ID)
+        return new Hogweed(x, y, &world);
 }
 

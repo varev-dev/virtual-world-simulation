@@ -13,7 +13,8 @@ private:
     static uint8_t SPREAD_ATTEMPTS;
 public:
     Sonchus(uint16_t x, uint16_t y, World *world);
-    void action() override;
+    void action(bool canBeOccupied) override;
+    static char ID;
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_SONCHUS_H

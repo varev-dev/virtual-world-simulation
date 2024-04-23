@@ -9,10 +9,12 @@
 
 class Plant : public Organism {
 protected:
+    static char DERIVED;
     uint8_t sowChance = 3; // higher - smaller chance to sow
 public:
     Plant(uint16_t x, uint16_t y, World* world);
-    void action() override;
+    static Organism* createRandom(uint16_t x, uint16_t y, World& world);
+    void action(bool canBeOccupied = false) override;
     void collision(Organism& organism) override;
 };
 

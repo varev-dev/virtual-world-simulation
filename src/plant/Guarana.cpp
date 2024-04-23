@@ -4,11 +4,12 @@
 
 #include "../../include/plant/Guarana.h"
 
+char Guarana::ID = Plant::DERIVED++;
 uint8_t Guarana::STRENGTH_INCREASE = 3;
 
 Guarana::Guarana(uint16_t x, uint16_t y, World *world) :
         Plant(x, y, world) {
-    sign = 'G';
+    sign = 'g';
 };
 
 void Guarana::collision(Organism &organism) {

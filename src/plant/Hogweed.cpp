@@ -5,13 +5,15 @@
 #include "../../include/plant/Hogweed.h"
 #include "../../include/Animal.h"
 
+char Hogweed::ID = Plant::DERIVED++;
+
 Hogweed::Hogweed(uint16_t x, uint16_t y, World *world) :
         Plant(x, y, world) {
     power = 10;
-    sign = 'H';
+    sign = 'h';
 }
 
-void Hogweed::action() {
+void Hogweed::action(bool canBeOccupied) {
     for (int i = 0; i < EAST; i++) {
         uint16_t* pos = newPosition((direction) i);
 

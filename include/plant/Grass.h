@@ -10,6 +10,7 @@
 class Grass : public Plant {
 public:
     Grass(uint16_t x, uint16_t y, World *world);
+    static char ID;
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_GRASS_H
