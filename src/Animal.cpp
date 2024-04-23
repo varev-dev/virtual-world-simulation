@@ -10,7 +10,10 @@
 #include "../include/animal/Fox.h"
 #include "../include/animal/Sheep.h"
 #include "../include/animal/Wolf.h"
+#include "../include/animal/Antelope.h"
+#include "../include/animal/Turtle.h"
 
+char Animal::DERIVED = 0;
 int32_t Animal::JUST_BORN = -2;
 int32_t Animal::FREE = -1;
 
@@ -20,7 +23,7 @@ Animal::Animal(uint16_t x, uint16_t y, World *world) :
     lastActionTurn = world->getTurn() ? JUST_BORN : FREE;
 }
 
-void Animal::action() {
+void Animal::action(bool canBeOccupied) {
     bool checked[4] = {false, false, false, false};
     while (!Organism::isEveryDirectionChecked(checked)) {
         direction dir = getRandomDirection();
@@ -35,7 +38,12 @@ void Animal::action() {
 
         Organism* collider = world->getOrganismByPosition(position[X], position[Y]);
 
-        if (collider) {
+        if (!canBeOccupied && collider) {
+            delete[] position;
+            continue;
+        }
+
+        if (canBeOccupied && collider) {
             collider->collision(*this);
             lastActionTurn = (int32_t) world->getTurn();
         }
@@ -100,4 +108,23 @@ void Animal::setLastActionTurn(int32_t turn) {
 
 void Animal::setLastActionTurn() {
     lastActionTurn = world->getTurn();
+}
+
+Organism *Animal::createRandom(uint16_t x, uint16_t y, World& world) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(0, DERIVED - 1);
+
+    int random = dis(gen);
+
+    if (random == Wolf::ID)
+        return new Wolf(x, y, &world);
+    else if (random == Fox::ID)
+        return new Fox(x, y, &world);
+    else if (random == Turtle::ID)
+        return new Turtle(x, y, &world);
+    else if (random == Antelope::ID)
+        return new Antelope(x, y, &world);
+    else if (random == Sheep::ID)
+        return new Sheep(x, y, &world);
 }

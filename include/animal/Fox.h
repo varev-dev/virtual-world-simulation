@@ -11,7 +11,9 @@ class Fox : public Animal {
 public:
     Fox(uint16_t x, uint16_t y, World *world);
     void collision(Organism &organism) override;
-    void action() override;
+    void action(bool canBeOccupied) override;
+
+    static char ID;
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_FOX_H

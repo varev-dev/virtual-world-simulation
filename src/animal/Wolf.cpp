@@ -4,6 +4,8 @@
 
 #include "../../include/animal/Wolf.h"
 
+char Wolf::ID = Animal::DERIVED++;
+
 Wolf::Wolf(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
     sign = 'W';
     power = 9;

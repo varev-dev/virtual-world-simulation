@@ -4,6 +4,8 @@
 
 #include "../../include/animal/Sheep.h"
 
+char Sheep::ID = Animal::DERIVED++;
+
 Sheep::Sheep(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
     sign = 'P';
     power = 4;

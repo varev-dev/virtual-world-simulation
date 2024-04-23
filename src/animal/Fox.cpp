@@ -4,6 +4,8 @@
 
 #include "../../include/animal/Fox.h"
 
+char Fox::ID = Animal::DERIVED++;
+
 Fox::Fox(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
     sign = 'F';
     power = 3;
@@ -18,7 +20,7 @@ void Fox::collision(Organism &organism) {
     Animal::collision(organism);
 }
 
-void Fox::action() {
+void Fox::action(bool canBeOccupied) {
     bool checked[4] = {false, false, false, false};
     while (!Organism::isEveryDirectionChecked(checked)) {
         direction dir = getRandomDirection();

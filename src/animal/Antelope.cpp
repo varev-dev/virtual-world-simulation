@@ -5,12 +5,14 @@
 #include <random>
 #include "../../include/animal/Antelope.h"
 
+char Antelope::ID = Animal::DERIVED++;
+
 Antelope::Antelope(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
     power = 4;
     initiative = 4;
 }
 
-void Antelope::action() {
+void Antelope::action(bool canBeOccupied) {
     Animal::action();
     Animal::action();
 }

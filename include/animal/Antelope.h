@@ -10,8 +10,10 @@
 class Antelope : public Animal {
 public:
     Antelope(uint16_t x, uint16_t y, World *world);
-    void action() override;
+    void action(bool canBeOccupied) override;
     void collision(Organism &organism) override;
+
+    static char ID;
 };
 
 #endif //VIRTUAL_WORLD_SIMULATION_ANTELOPE_H
