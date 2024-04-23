@@ -12,11 +12,13 @@ Human::Human(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
     sign = 'H';
     power = 5;
     initiative = 4;
+    name = "Czlowiek";
 }
 
 Human::Human(uint16_t x, uint16_t y, uint8_t power, uint16_t skill, World *world) : Animal(x, y, power, skill, world) {
     sign = 'H';
     initiative = 4;
+    name = "Czlowiek";
 }
 
 void Human::action(bool canBeOccupied, bool dodgeStronger) {
@@ -40,7 +42,7 @@ void Human::action(bool canBeOccupied, bool dodgeStronger) {
 }
 
 void Human::collision(Organism &organism) {
-    if (lastActionTurn + SKILL_DURATION < world->getTurn()) Animal::action(false);
+    if (lastActionTurn + SKILL_DURATION >= world->getTurn()) Animal::action(false);
     else Animal::collision(organism);
 }
 
@@ -48,7 +50,7 @@ void Human::setOption(int opt) {
     this->option = opt;
 
     if (option == Game::USE_SKILL_KEY) {
-        if (this->getLastActionTurn() + SKILL_DURATION + SKILL_DELAY < world->getTurn())
+        if (lastActionTurn + SKILL_DURATION + SKILL_DELAY < world->getTurn() || lastActionTurn == FREE)
             lastActionTurn = world->getTurn();
     }
 }
