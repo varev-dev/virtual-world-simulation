@@ -13,13 +13,14 @@ class Game {
 private:
     World* world;
     static std::filesystem::path SAVE_PATH;
+    void initBySign(char sign, uint16_t x, uint16_t y, uint8_t power, uint16_t action);
 public:
-    static char EXIT_KEY, NEXT_TURN_KEY, USE_SKILL_KEY;
+    static char EXIT_KEY, NEXT_TURN_KEY, USE_SKILL_KEY, SAVE_KEY;
 
     Game();
     void createWorld();
     bool saveWorld();
-    void loadWorld();
+    bool loadWorld();
     void simulate();
 };
 

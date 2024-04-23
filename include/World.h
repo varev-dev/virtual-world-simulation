@@ -30,9 +30,9 @@ public:
     uint16_t getWidth() const;
     uint16_t getHeight() const;
     int32_t getTurn() const;
+    void setTurn(int32_t turn);
     Organism* getHuman();
-
-    void growPlant(Organism& organism, uint16_t* position);
+    void setHuman(Organism* org);
     void addOrganism(Organism& organism);
     void addMessage(const std::string& message);
     std::vector<Organism*> getOrganisms();

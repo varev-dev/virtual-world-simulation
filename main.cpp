@@ -1,7 +1,7 @@
 //#pragma once
 #include <iostream>
 #include <unistd.h>
-#include <ncurses.h>
+//#include <ncurses.h>
 #include "include/Game.h"
 
 int main() {
@@ -10,20 +10,16 @@ int main() {
     //keypad(stdscr, TRUE);
 
     Game game = Game();
-    game.createWorld();
-    game.saveWorld();
-
-//    world->initOrganisms();
-//
-//    char input = '\0';
-//    while (input != 'K' && input != 'k') {
-//        world->printWorld();
-//        input = getch();
-//
-//        if (input == 'P' || input == 'p')
-//            world->makeTurn();
-//        usleep(500000);
-//    }
+    char input = 0;
+    while (input != 'L' && input != 'N') {
+        std::cout << "Enter letter (L - Load, N - New): ";
+        std::cin >> input;
+    }
+    if (input == 'L')
+        game.loadWorld();
+    else
+        game.createWorld();
+    game.simulate();
 
     //endwin();
     return 0;
