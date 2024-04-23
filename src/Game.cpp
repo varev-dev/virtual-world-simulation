@@ -9,6 +9,9 @@
 #include "../include/Game.h"
 
 std::filesystem::path Game::SAVE_PATH = "saves";
+char Game::EXIT_KEY = 'E';
+char Game::NEXT_TURN_KEY = 'P';
+char Game::USE_SKILL_KEY = 'U';
 
 Game::Game() = default;
 
@@ -57,5 +60,10 @@ void Game::loadWorld() {
 }
 
 void Game::simulate() {
+    int input = 0;
+    while (input != EXIT_KEY) {
+        input = getchar();
 
+        if (input == NEXT_TURN_KEY) world->makeTurn();
+    }
 }

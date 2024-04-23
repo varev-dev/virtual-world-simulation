@@ -21,6 +21,12 @@ Animal::Animal(uint16_t x, uint16_t y, World *world) :
     lastActionTurn = world->getTurn() ? JUST_BORN : FREE;
 }
 
+Animal::Animal(uint16_t x, uint16_t y, uint8_t power, uint16_t action, World *world)
+        : Organism(x, y, power, 1, world) {
+    Organism::sign = 'A';
+    lastActionTurn = action;
+}
+
 void Animal::action(bool canBeOccupied, bool dodgeStronger) {
     bool checked[4] = {false, false, false, false};
     while (!Organism::isEveryDirectionChecked(checked)) {
@@ -88,6 +94,10 @@ bool Animal::birth() {
             organism = new Fox(position[X], position[Y], world);
         else if (dynamic_cast<Sheep*>(this))
             organism = new Sheep(position[X], position[Y], world);
+        else if (dynamic_cast<Turtle*>(this))
+            organism = new Turtle(position[X], position[Y], world);
+        else if (dynamic_cast<Antelope*>(this))
+            organism = new Antelope(position[X], position[Y], world);
 
         world->addOrganism(*organism);
         lastActionTurn = (int32_t) world->getTurn();

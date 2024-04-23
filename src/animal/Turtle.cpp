@@ -14,6 +14,12 @@ Turtle::Turtle(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
     initiative = 1;
 }
 
+Turtle::Turtle(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World *world)
+        : Animal(x, y, power, initiative, world) {
+    sign = 'T';
+    this->initiative = 1;
+}
+
 void Turtle::collision(Organism &organism) {
     if (auto* other = dynamic_cast<Turtle*>(&organism)) {
         birth() ?: other->birth();

@@ -13,6 +13,14 @@ Antelope::Antelope(uint16_t x, uint16_t y, World *world) : Animal(x, y, world) {
     initiative = 4;
 }
 
+Antelope::Antelope(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World *world)
+        : Animal(x, y, power, initiative, world) {
+    sign = 'A';
+    this->power = power;
+    this->initiative = 4;
+    lastActionTurn = initiative;
+}
+
 void Antelope::action(bool canBeOccupied, bool dodgeStronger) {
     Animal::action();
     Animal::action();
@@ -29,4 +37,3 @@ void Antelope::collision(Organism &organism) {
     if (random == 0) Animal::action(false);
     if (random || (oldX == x && oldY == y)) Animal::collision(organism);
 }
-

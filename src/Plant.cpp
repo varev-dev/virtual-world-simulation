@@ -18,6 +18,11 @@ Plant::Plant(uint16_t x, uint16_t y, World *world) :
     Organism::sign = 'p';
 };
 
+Plant::Plant(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World *world)
+        : Organism(x, y, power, initiative, world) {
+    Organism::sign = 'p';
+}
+
 void Plant::collision(Organism &organism) {
     world->removeOrganism(*this);
     auto* position = new uint16_t[2]{x, y};
@@ -71,4 +76,3 @@ Organism *Plant::createRandom(uint16_t x, uint16_t y, World& world) {
     else if (random == Hogweed::ID)
         return new Hogweed(x, y, &world);
 }
-

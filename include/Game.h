@@ -14,6 +14,8 @@ private:
     World* world;
     static std::filesystem::path SAVE_PATH;
 public:
+    static char EXIT_KEY, NEXT_TURN_KEY, USE_SKILL_KEY;
+
     Game();
     void createWorld();
     bool saveWorld();

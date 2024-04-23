@@ -11,7 +11,7 @@
 int32_t Organism::JUST_BORN = -2;
 int32_t Organism::FREE = -1;
 
-Organism::Organism(uint16_t x, uint16_t y, uint8_t power, uint8_t initiative, World* world) :
+Organism::Organism(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World* world) :
         x(x), y(y), power(power), initiative(initiative), world(world) {};
 
 Organism::~Organism() = default;
