@@ -68,7 +68,7 @@ void World::printWorld() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
             Organism* org = getOrganismByPosition(j, i);
-            std::cout << (char) (org ? org->getSign() : ' ');
+            std::cout << (char) (org ? org->getSign() : '_');
         }
         std::cout << std::endl;
     }
@@ -152,19 +152,19 @@ void World::initOrganisms() {
 
     uint16_t position[2];
 
-    this->human = new Human(0, 1, this);
+    this->human = new Human(width/2, height/2, this);
     addOrganism(*human);
-    addOrganism(*(new Wolf(0, 0, this)));
-//    for (int i = 0; i < animals + plants;) {
-//        position[X] = x(gen);
-//        position[Y]= y(gen);
-//
-//        if (getOrganismByPosition(position[X], position[Y])) continue;
-//        else i++;
-//
-//        if (i < animals) addOrganism(*(Animal::createRandom(position[X], position[Y], *this)));
-//        else addOrganism(*(Plant::createRandom(position[X], position[Y], *this)));
-//    }
+//    addOrganism(*(new Wolf(0, 0, this)));
+    for (int i = 0; i < animals + plants;) {
+        position[X] = x(gen);
+        position[Y]= y(gen);
+
+        if (getOrganismByPosition(position[X], position[Y])) continue;
+        else i++;
+
+        if (i < animals) addOrganism(*(Animal::createRandom(position[X], position[Y], *this)));
+        else addOrganism(*(Plant::createRandom(position[X], position[Y], *this)));
+    }
 }
 
 Organism* World::getHuman() {
@@ -181,4 +181,9 @@ void World::setTurn(int32_t turn) {
 
 void World::setHuman(Organism *org) {
     this->human = org;
+}
+
+World::~World() {
+    organisms.clear();
+    messages.clear();
 }

@@ -21,6 +21,7 @@ int main() {
         game.createWorld();
     game.simulate();
 
+    delete &game;
     //endwin();
     return 0;
 }

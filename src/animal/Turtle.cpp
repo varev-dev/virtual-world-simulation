@@ -27,7 +27,10 @@ void Turtle::collision(Organism &organism) {
         Animal::birth();
         return;
     }
-    if (organism.getPower() < MAX_POWER_TO_IGNORE) return;
+    if (organism.getPower() < MAX_POWER_TO_IGNORE) {
+        world->addMessage(name + " odbija cios");
+        return;
+    }
     Animal::collision(organism);
 }
 

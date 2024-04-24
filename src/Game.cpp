@@ -23,7 +23,7 @@ std::filesystem::path Game::SAVE_PATH = "saves";
 char Game::EXIT_KEY = 'E';
 char Game::NEXT_TURN_KEY = 'P';
 char Game::USE_SKILL_KEY = 'U';
-char Game::SAVE_KEY = 'S';
+char Game::SAVE_KEY = 'R';
 
 Game::Game() = default;
 
@@ -134,7 +134,8 @@ bool isMoveKey(int input) {
 void Game::simulate() {
     int input = 0;
     while (input != EXIT_KEY) {
-        world->printWorld();
+        if (input != '\n')
+            world->printWorld();
         input = getchar();
 
         if (input == SAVE_KEY) saveWorld();
@@ -147,4 +148,8 @@ void Game::simulate() {
             world->makeTurn();
         }
     }
+}
+
+Game::~Game() {
+    delete this->world;
 }

@@ -29,8 +29,10 @@ void Hogweed::action(bool canBeOccupied, bool dodgeStronger) {
             continue;
         }
 
-        if (auto* a = dynamic_cast<Animal*>(org))
+        if (auto* a = dynamic_cast<Animal*>(org)) {
+            world->addMessage(org->getName() + " umiera przez " + name);
             world->removeOrganism(*org);
+        }
         delete[] pos;
     }
 }

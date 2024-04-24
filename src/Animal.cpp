@@ -63,8 +63,8 @@ void Animal::action(bool canBeOccupied, bool dodgeStronger) {
 
 void Animal::collision(Organism &organism) {
     world->addMessage("Kolizja " + this->name + " " + organism.getName());
-    if (power <= organism.getPower()) world->removeOrganism(*this);
-    else world->removeOrganism(organism);
+    if (power <= organism.getPower()) {world->addMessage(name + " umiera"); world->removeOrganism(*this); }
+    else {world->addMessage(organism.getName() + " umiera"); world->removeOrganism(organism); }
 }
 
 bool Animal::birth(uint16_t x, uint16_t y) {

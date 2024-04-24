@@ -24,6 +24,7 @@ Plant::Plant(uint16_t x, uint16_t y, uint8_t power, uint16_t initiative, World *
 }
 
 void Plant::collision(Organism &organism) {
+    world->addMessage("Kolizja " + this->name + " " + organism.getName());
     world->removeOrganism(*this);
     auto* position = new uint16_t[2]{x, y};
     organism.updatePosition(position);

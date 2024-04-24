@@ -26,6 +26,7 @@ private:
 
 public:
     World(uint16_t width, uint16_t height);
+    ~World();
     void initOrganisms();
     uint16_t getWidth() const;
     uint16_t getHeight() const;

@@ -18,6 +18,7 @@ public:
     static char EXIT_KEY, NEXT_TURN_KEY, USE_SKILL_KEY, SAVE_KEY;
 
     Game();
+    ~Game();
     void createWorld();
     bool saveWorld();
     bool loadWorld();

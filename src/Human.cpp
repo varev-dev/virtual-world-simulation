@@ -38,12 +38,14 @@ void Human::action(bool canBeOccupied, bool dodgeStronger) {
     Organism* collider = world->getOrganismByPosition(position[X], position[Y]);
 
     if (collider) collider->collision(*this);
-    else updatePosition(position);
+    if (!collider) updatePosition(position);
 }
 
 void Human::collision(Organism &organism) {
-    if (lastActionTurn + SKILL_DURATION >= world->getTurn()) Animal::action(false);
-    else Animal::collision(organism);
+    if (lastActionTurn + SKILL_DURATION >= world->getTurn() && lastActionTurn != FREE) {
+        world->addMessage("Czlowiek unika kolizji dzieki umiejetnosci");
+        organism.action(false, false);
+    } else Animal::collision(organism);
 }
 
 void Human::setOption(int opt) {

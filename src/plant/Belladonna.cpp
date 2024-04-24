@@ -13,6 +13,7 @@ Belladonna::Belladonna(uint16_t x, uint16_t y, World *world) :
 }
 
 void Belladonna::collision(Organism &organism) {
+    world->addMessage(organism.getName() + " umiera");
     world->removeOrganism(organism);
 }
 
